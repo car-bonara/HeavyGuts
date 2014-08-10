@@ -15,7 +15,35 @@ public class ResultsController : MonoBehaviour {
 	[SerializeField]
 	private UISprite genderSprite;
 
+	[SerializeField]
+	private HeavyGutsButton addCalorieButton;
+
+	private float result = 0f;
+
 	void Start () {
+		SetResultValues ();
+		AddListener ();
+	}
+
+	void OnDestroy() {
+		RemoveListener ();
+	}
+
+	void AddListener() {
+		addCalorieButton.AddListener (OnClickAddCalorie);
+	}
+
+	void RemoveListener() {
+		addCalorieButton.RemoveListener (OnClickAddCalorie);
+	}
+
+	void OnClickAddCalorie() {
+		PlayerPrefs.SetFloat ("Calories", result);
+		PlayerPrefs.Save ();
+		Application.LoadLevel("Food");
+	}
+
+	void SetResultValues() {
 		SetPlayerName ();
 		SetGenderSprite ();
 		SetCalorie ();
@@ -38,8 +66,6 @@ public class ResultsController : MonoBehaviour {
 	}
 
 	void SetCalorie() {
-		float result = 0f;
-
 		if (PlayerPrefs.GetString ("Gender") == "Male") 
 			result = 10 * PlayerPrefs.GetFloat ("Weight") + 6.25f * PlayerPrefs.GetFloat ("Height") - 5 *
 				PlayerPrefs.GetInt ("Age") + 5;
@@ -47,6 +73,6 @@ public class ResultsController : MonoBehaviour {
 			result = 10 * PlayerPrefs.GetFloat ("Weight") + 6.25f * PlayerPrefs.GetFloat ("Height") - 5 *
 				PlayerPrefs.GetInt ("Age") - 161;
 
-		calorieLabel.text = result.ToString ();
+		calorieLabel.text = "Calories: " + result.ToString ();
 	}
 }
