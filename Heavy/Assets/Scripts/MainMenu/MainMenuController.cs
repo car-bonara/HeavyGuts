@@ -42,7 +42,7 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 	void OnClickStart() {
-		Debug.Log("You Clicked Start!");
+		Application.LoadLevel("Calorator");
 	}
 
 	void OnClickAbout() {
