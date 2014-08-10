@@ -68,6 +68,7 @@ public class CaloratorController : MonoBehaviour {
 			PlayerPrefs.SetFloat("Height", heightHolder);
 			PlayerPrefs.SetFloat("Weight", weightHolder);
 			PlayerPrefs.Save ();
+			Application.LoadLevel("Results");
 		} else 
 			Debug.LogError("Not completed");
 	}
